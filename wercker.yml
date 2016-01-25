@@ -9,7 +9,7 @@ build:
         - script:
             name: Make distributables
             code: |
-                make
+                make release
         - tcnksm/zip:
             input: dist
             output: $WERCKER_OUTPUT_DIR/dist
