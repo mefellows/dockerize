@@ -1,0 +1,24 @@
+box: tcnksm/gox
+build:
+    steps:
+        - setup-go-workspace
+        - script:
+            name: go get
+            code: |
+                go get -t ./...
+        - script:
+            name: gox build
+            code: |
+                XC_OS="linux darwin freebsd" XC_ARCH="386 amd64" ./scripts/build.sh
+        - tcnksm/zip:
+            input: pkg
+            output: $WERCKER_OUTPUT_DIR/dist
+# Manual deployment
+deploy:
+    steps:
+        - tcnksm/ghr:
+            token: $GITHUB_TOKEN
+            version: $RELEASE_VERSION
+            input: dist
+            replace: true
+            pre-release: $RELEASE_IS_DRAFT
