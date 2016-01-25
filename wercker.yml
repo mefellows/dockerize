@@ -7,9 +7,9 @@ build:
             code: |
                 go get -t ./...
         - script:
-            name: gox build
+            name: Make distributables
             code: |
-                XC_OS="linux darwin freebsd" XC_ARCH="386 amd64" ./scripts/build.sh
+                make release 
         - tcnksm/zip:
             input: pkg
             output: $WERCKER_OUTPUT_DIR/dist
