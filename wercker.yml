@@ -10,10 +10,6 @@ build:
             name: Make distributables
             code: |
                 make release
-        - tcnksm/zip:
-            input: dist
-            output: $WERCKER_OUTPUT_DIR/dist
-# Manual deployment
 deploy:
     steps:
         - tcnksm/ghr:
